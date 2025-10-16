@@ -92,14 +92,3 @@ git add .gitignore README.md run-gui.ps1 src\main\java Base\ Concrete\ Decorator
 git commit -m "Organize project, wire GUI to domain model, add run script and README"
 git push origin main
 ```
-
-If you want me to commit and push for you, tell me which git identity (name/email) to use for the commit.
-
----
-
-If you want I can also:
-- Add package declarations (`com.coffeeshop`) and update the run script accordingly.
-- Add a small `run-gui.sh` for macOS/Linux.
-- Commit and push the current changes to GitHub (need your git name/email to create the commit).
-
-That's it  the README now focuses on what the app does and the exact, minimal commands to run the GUI from the VS Code PowerShell terminal.
