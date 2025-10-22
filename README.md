@@ -92,7 +92,4 @@ git add .gitignore README.md run-gui.ps1 src\main\java Base\ Concrete\ Decorator
 git commit -m "Organize project, wire GUI to domain model, add run script and README"
 git push origin main
 ```
-
-If you want me to commit and push for you, tell me which git identity (name/email) to use for the commit.
-
 ---

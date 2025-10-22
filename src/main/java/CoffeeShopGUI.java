@@ -9,7 +9,8 @@ import main.java.Decorator.*;
 /**
  * Coffee Shop GUI demonstrating Decorator Pattern.
  */
-public class CoffeeShopGUI extends JFrame {
+public class CoffeeShopGUI extends JFrame 
+{
     private JComboBox<String> baseBox, sizeBox;
     private JCheckBox[] condiments;
     private JTextArea summaryArea;
@@ -39,7 +40,8 @@ public class CoffeeShopGUI extends JFrame {
         middlePanel.setBorder(BorderFactory.createTitledBorder("Condiments"));
         String[] condNames = {"Milk", "Mocha", "Soy", "Whip", "Caramel", "Vanilla"};
         condiments = new JCheckBox[condNames.length];
-        for (int i = 0; i < condNames.length; i++) {
+        for (int i = 0; i < condNames.length; i++) 
+        {
             condiments[i] = new JCheckBox(condNames[i]);
             condiments[i].addActionListener(e -> updateOrder());
             middlePanel.add(condiments[i]);
@@ -66,24 +68,30 @@ public class CoffeeShopGUI extends JFrame {
         add(rightPanel, BorderLayout.EAST);
     }
 
-    private void updateOrder() {
+    private void updateOrder() 
+    {
         String base = (String) baseBox.getSelectedItem();
         String size = (String) sizeBox.getSelectedItem();
-        if (base == null || base.equals("Select Base")) {
+        if (base == null || base.equals("Select Base")) 
+        {
             summaryArea.setText("⚠ Please select a base coffee.");
             return;
         }
 
-        switch(base) {
+        switch(base) 
+        {
             case "Espresso": currentCoffee = new Espresso(); break;
             case "House Blend": currentCoffee = new HouseBlend(); break;
             case "Dark Roast": currentCoffee = new DarkRoast(); break;
             case "Decaf": currentCoffee = new Decaf(); break;
         }
 
-        for (JCheckBox box : condiments) {
-            if (box.isSelected()) {
-                switch (box.getText()) {
+        for (JCheckBox box : condiments) 
+        {
+            if (box.isSelected()) 
+            {
+                switch (box.getText()) 
+                {
                     case "Milk": currentCoffee = new Milk(currentCoffee); break;
                     case "Mocha": currentCoffee = new Mocha(currentCoffee); break;
                     case "Soy": currentCoffee = new Soy(currentCoffee); break;
@@ -98,23 +106,27 @@ public class CoffeeShopGUI extends JFrame {
         summaryArea.append(String.format("\nTotal: $%.2f", currentCoffee.cost(size)));
     }
 
-    private void clearOrder() {
+    private void clearOrder() 
+    {
         baseBox.setSelectedIndex(0);
         sizeBox.setSelectedIndex(0);
         for (JCheckBox box : condiments) box.setSelected(false);
         summaryArea.setText("");
     }
 
-    private void checkout() {
-        if (summaryArea.getText().isEmpty() || baseBox.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(this, "⚠ Please select a base coffee before checkout.");
+    private void checkout() 
+    {
+        if (summaryArea.getText().isEmpty() || baseBox.getSelectedIndex() == 0) 
+        {
+            JOptionPane.showMessageDialog(this, "Please select a base coffee before checkout.");
             return;
         }
-        JOptionPane.showMessageDialog(this, "✅ Order placed successfully!");
+        JOptionPane.showMessageDialog(this, "Order placed successfully!");
         clearOrder();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
         SwingUtilities.invokeLater(() -> new CoffeeShopGUI().setVisible(true));
     }
 }
