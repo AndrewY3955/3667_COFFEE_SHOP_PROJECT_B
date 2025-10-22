@@ -62,7 +62,7 @@ Cart items and the last builder selections are saved using `java.util.prefs.Pref
 
 ## How pricing works (short)
 
-Total = (base price + sum(condiment extras))  size multiplier
+Total = ((base price x size multiplier)) + ((sum(condiment options)) x size multiplier))
 
 Default multipliers used by the UI:
 - Small = 1.0
