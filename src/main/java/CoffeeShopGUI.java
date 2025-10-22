@@ -15,7 +15,7 @@ public class CoffeeShopGUI extends JFrame
     private JCheckBox[] condiments;
     private JTextArea summaryArea;
     private JButton clearBtn, checkoutBtn;
-    private Coffee currentCoffee;
+    private main.java.Base.Coffee currentCoffee;
 
     public CoffeeShopGUI() {
         setTitle("Coffee Shop Decorator GUI");
@@ -29,7 +29,6 @@ public class CoffeeShopGUI extends JFrame
         baseBox = new JComboBox<>(new String[]{"Select Base", "Espresso", "House Blend", "Dark Roast", "Decaf"});
         baseBox.addActionListener(e -> updateOrder());
         sizeBox = new JComboBox<>(new String[]{"Small", "Medium", "Large"});
-        sizeBox.setSelectedIndex(0); // Small by default
         sizeBox.addActionListener(e -> updateOrder());
         leftPanel.add(new JLabel("Base:"));
         leftPanel.add(baseBox);
@@ -67,11 +66,6 @@ public class CoffeeShopGUI extends JFrame
         add(leftPanel, BorderLayout.WEST);
         add(middlePanel, BorderLayout.CENTER);
         add(rightPanel, BorderLayout.EAST);
-
-        // Initialize default coffee order: HouseBlend, Small
-        currentCoffee = new HouseBlend();
-        baseBox.setSelectedIndex(2); // "House Blend"
-        updateOrder();
     }
 
     private void updateOrder() 
