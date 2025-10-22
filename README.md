@@ -1,95 +1,90 @@
-﻿# 3667_COFFEE_SHOP_PROJECT_B
+﻿# Project B
+A Java Swing GUI demonstrating the Decorator pattern while letting a user build and price custom coffee drinks.
 
-A small Java Swing GUI that demonstrates the Decorator pattern while letting a user build and price custom coffee drinks.
-
-This README is intentionally concise: it explains what the app does and the exact commands to run the GUI from the VS Code integrated terminal (PowerShell).
-
-## What the app does
+# What does this project do?
+What the app does
 
 - Let users choose a base beverage (Espresso, Dark Roast, Decaf, House Blend).
-- Choose exactly one size (Small, Medium, Large)  the app applies a size multiplier to the full price.
+
+- Choose exactly one size (Small, Medium, Large). The app applies a size multiplier to the full price. Small is the default size.
+
 - Pick any combination of condiments (Milk, Mocha, Soy, Whip, Caramel, Vanilla).
-- Show a live, readable price breakdown: base price, condiment extras, subtotal, size multiplier, and final total.
-- Add composed drinks to a persistent cart (view, edit, remove) and perform a simple checkout.
 
-All pricing is computed by the domain model (the base concrete classes and the condiment decorators) so the GUI does not duplicate price logic.
+- Show a live summary: coffee description and total price. Pricing is computed exclusively by the base coffee and condiment decorators.
 
-## Quick run  VS Code (PowerShell)  recommended
+- The GUI initializes with Small House Blend selected, showing a valid starting price.
 
-I provide a single PowerShell launcher `run-gui.ps1` in the project root that compiles and runs the app using the JDK that `javac` belongs to. From the VS Code integrated terminal (PowerShell), run either:
+- Quick run (VS Code PowerShell recommended)
 
-```powershell
+- The project includes a PowerShell launcher run-gui.ps1:
+
 # If your execution policy allows running scripts:
-.\\run-gui.ps1
+.\run-gui.ps1
 
-# If your environment blocks scripts, run with a temporary bypass:
+# If scripts are blocked, bypass temporarily:
 powershell -ExecutionPolicy Bypass -File .\\run-gui.ps1
-```
 
-The script will create an `out\` folder (if needed), compile the Java sources, and launch the GUI using the `java.exe` that matches `javac` to avoid classfile-version errors.
+# Execution of the program
+The script creates an out\ folder if needed, compiles all Java sources, and launches the GUI using the java.exe matching your javac.
 
-## Manual compile & run (PowerShell)
+Manual compile & run (PowerShell)
 
-If you prefer to run commands manually, use these steps from the project root:
+Run these commands from the project root if you prefer manual steps:
 
-```powershell
-# create output folder
+# Create output folder
 New-Item -ItemType Directory -Path .\out -Force | Out-Null
 
-# compile sources (adjust paths if you refactor into packages)
-javac -d out src\main\java\CoffeeShopGUI.java Base\*.java Concrete\*.java Decorator\*.java
+# Compile sources
+javac -d out CoffeeShopGUI.java Base\*.java Concrete\*.java Decorator\*.java
 
-# run using the java.exe that matches javac (avoids UnsupportedClassVersionError):
+# Run GUI with matching java.exe
 $javacPath = (Get-Command javac).Source
 $binDir = Split-Path $javacPath -Parent
 $jdkDir = Split-Path $binDir -Parent
 $javaExe = Join-Path $jdkDir 'bin\\java.exe'
 & $javaExe -cp out CoffeeShopGUI
-```
 
-Note: if you add package declarations (recommended later), run the main class by its fully qualified name (for example `com.coffeeshop.CoffeeShopGUI`).
 
-## Requirements
+# Project layout
 
-- JDK 17+ is recommended. Use the same JDK for compile and runtime to avoid classfile-version problems.
+CoffeeShopGUI.java – Swing GUI and controller logic, builds decorated Coffee objects at runtime.
 
-## Persistence
+Base/Coffee.java – domain interface for beverages.
 
-Cart items and the last builder selections are saved using `java.util.prefs.Preferences` (per-user desktop preferences). This keeps the demo simple and cross-platform.
+Concrete/*.java – concrete coffee classes (Espresso, DarkRoast, Decaf, HouseBlend).
 
-## Project layout (important files)
+Decorator/* – condiment decorators and CondimentDecorator base.
 
-- `src/main/java/CoffeeShopGUI.java`  Swing GUI and controller logic (builds decorated objects at runtime).
-- `Base/Coffee.java`  domain interface for coffee beverages.
-- `Concrete/*.java`  concrete base coffee classes (Espresso, DarkRoast, Decaf, HouseBlendCoffee).
-- `Decorator/*`  condiment decorator implementations and `CoffeeDecorator` base.
-- `run-gui.ps1`  PowerShell helper to compile and run the GUI (recommended on Windows).
-- `.gitignore`  keeps build outputs and editor files out of commits.
+run-gui.ps1 – PowerShell helper to compile and run the GUI.
 
-## How pricing works (short)
+.gitignore – keeps build outputs and editor files out of commits.
 
-Total = (base price + sum(condiment extras))  size multiplier
+# How pricing works
 
-Default multipliers used by the UI:
-- Small = 1.0
-- Medium = 1.2
-- Large = 1.4
+Total = ((base price × size multiplier) + (sum of all condiment extras × size multiplier))
 
-The GUI composes a decorated `Coffee` object at runtime and calls its `cost()` method  this ensures the Decorator pattern is the single source of pricing truth.
+Size multipliers:
 
-## Troubleshooting
+Small = 1.0 (default)
 
-- UnsupportedClassVersionError: run the `java.exe` from the same JDK that `javac` belongs to (see the manual run steps above).
-- PowerShell script blocked by execution policy: run with `-ExecutionPolicy Bypass -File .\\run-gui.ps1` or use the manual compile/run commands.
-- Strange characters in dialogs: the UI uses ASCII hyphens and `x` for multipliers to avoid encoding issues.
+Medium = 1.2
 
-## Committing & publishing (quick)
+Large = 1.4
 
-Before publishing, ensure `out/` is excluded (it's ignored by `.gitignore`). To commit the current changes locally and push to the existing remote:
+The GUI dynamically composes a decorated Coffee object and calls its cost(size) method. The Decorator pattern ensures this formula is applied consistently for both base coffee and condiments.
 
-```powershell
-git add .gitignore README.md run-gui.ps1 src\main\java Base\ Concrete\ Decorator\
-git commit -m "Organize project, wire GUI to domain model, add run script and README"
+# Troubleshooting
+
+UnsupportedClassVersionError: Run the java.exe from the same JDK as javac.
+
+PowerShell script blocked: Use -ExecutionPolicy Bypass -File .\\run-gui.ps1 or manual compile/run steps.
+
+Strange characters in dialogs: UI uses ASCII hyphens and x for multipliers to avoid encoding issues.
+
+# Committing & publishing
+
+Ensure out/ is ignored. Example to commit and push:
+
+git add .gitignore README.md run-gui.ps1 Base\Concrete\Decorator\CoffeeShopGUI.java
+git commit -m "Update GUI: default Small HouseBlend, decorator pricing, run script, README"
 git push origin main
-```
----

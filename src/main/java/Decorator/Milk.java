@@ -2,35 +2,37 @@ package main.java.Decorator;
 
 import main.java.Base.Coffee;
 
-/** Adds Milk to a coffee */
-public class Milk extends CondimentDecorator 
-{
-    private Coffee coffee;
+public class Milk extends CondimentDecorator {
+    private double price = 0.20;
 
-    public Milk(Coffee coffee) 
-	{
-        this.coffee = coffee;
+    public Milk(Coffee coffee) {
+        super(coffee);
     }
 
     @Override
-    public String getDescription() 
-    {
+    public String getDescription() {
         return coffee.getDescription() + ", Milk";
     }
 
     @Override
-    public double cost(String size) 
-    {
-        double add = 0.20;
-        return coffee.cost(size) + (add * getSizeMultiplier(size));
+    public double cost(String size) {
+        double coffeeSizeMultiplier = getSizeMultiplier(size);
+
+        double sumOfAllCondiments = price;
+        if (coffee instanceof CondimentDecorator) {
+            sumOfAllCondiments += ((CondimentDecorator) coffee).getCondimentSum();
+        }
+
+        double baseCoffeeCost = coffee.cost(size) - (sumOfAllCondiments * coffeeSizeMultiplier);
+        return ((baseCoffeeCost * coffeeSizeMultiplier) + (sumOfAllCondiments * coffeeSizeMultiplier));
     }
 
-    private double getSizeMultiplier(String size) 
-    {
-        switch (size) {
-            case "Medium": return 1.2;
-            case "Large": return 1.4;
-            default: return 1.0;
+    @Override
+    public double getCondimentSum() {
+        double sum = price;
+        if (coffee instanceof CondimentDecorator) {
+            sum += ((CondimentDecorator) coffee).getCondimentSum();
         }
+        return sum;
     }
 }
