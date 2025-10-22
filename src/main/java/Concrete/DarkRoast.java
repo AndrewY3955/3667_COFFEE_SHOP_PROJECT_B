@@ -1,32 +1,25 @@
-/**
- * This class is a type of drink made from Coffee. 
- * Its a derived class called DarkRoast
- * 
- */
-public class DarkRoast implements Coffee {
+package main.java.Concrete;
 
-    @Override
-    public String getDescription() {
-        return "Dark Roast Coffee";
+import main.java.Base.Coffee;
+
+/** Concrete Coffee: Dark Roast */
+public class DarkRoast extends Coffee {
+
+    public DarkRoast() {
+        description = "Dark Roast";
     }
 
     @Override
-    public double cost() {
-        return 1.5;
+    public double cost(String size) {
+        double base = 1.60;
+        return base * getSizeMultiplier(size);
     }
 
-    @Override
-    public int size() {
-        return 2; // MEDIUM by default
-    }
-
-    @Override
-    public double extra() {
-        return 0.0;
-    }
-
-    @Override
-    public double basePrice() {
-        return cost();
+    private double getSizeMultiplier(String size) {
+        switch (size) {
+            case "Medium": return 1.2;
+            case "Large": return 1.4;
+            default: return 1.0;
+        }
     }
 }

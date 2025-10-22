@@ -2,16 +2,16 @@ package main.java.Concrete;
 
 import main.java.Base.Coffee;
 
-/** Concrete Beverage: Decaf */
-public class Decaf extends Coffee {
+/** Concrete Coffee: House Blend */
+public class HouseBlend extends Coffee {
 
-    public Decaf() {
-        description = "Decaf";
+    public HouseBlend() {
+        description = "House Blend";
     }
 
     @Override
     public double cost(String size) {
-        double base = 1.40;
+        double base = 1.50;
         return base * getSizeMultiplier(size);
     }
 

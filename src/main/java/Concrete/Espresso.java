@@ -1,30 +1,25 @@
-/**
- * Espresso concrete base class
- */
-public class Espresso implements Coffee {
+package main.java.Concrete;
 
-    @Override
-    public String getDescription() {
-        return "Espresso";
+import main.java.Base.Coffee;
+
+/** Concrete Coffee: Espresso */
+public class Espresso extends Coffee {
+
+    public Espresso() {
+        description = "Espresso";
     }
 
     @Override
-    public double cost() {
-        return 2.0;
+    public double cost(String size) {
+        double base = 1.80;
+        return base * getSizeMultiplier(size);
     }
 
-    @Override
-    public int size() {
-        return 2; // MEDIUM default
-    }
-
-    @Override
-    public double extra() {
-        return 0.0;
-    }
-
-    @Override
-    public double basePrice() {
-        return cost();
+    private double getSizeMultiplier(String size) {
+        switch (size) {
+            case "Medium": return 1.2;
+            case "Large": return 1.4;
+            default: return 1.0;
+        }
     }
 }

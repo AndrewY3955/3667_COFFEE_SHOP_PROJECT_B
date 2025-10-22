@@ -9,7 +9,7 @@ This README is intentionally concise: it explains what the app does and the exac
 - Let users choose a base beverage (Espresso, Dark Roast, Decaf, House Blend).
 - Choose exactly one size (Small, Medium, Large)  the app applies a size multiplier to the full price.
 - Pick any combination of condiments (Milk, Mocha, Soy, Whip, Caramel, Vanilla).
-- Show a live, human-readable price breakdown: base price, condiment extras, subtotal, size multiplier (shown with ASCII `x`), and final total.
+- Show a live, readable price breakdown: base price, condiment extras, subtotal, size multiplier, and final total.
 - Add composed drinks to a persistent cart (view, edit, remove) and perform a simple checkout.
 
 All pricing is computed by the domain model (the base concrete classes and the condiment decorators) so the GUI does not duplicate price logic.
@@ -96,10 +96,3 @@ git push origin main
 If you want me to commit and push for you, tell me which git identity (name/email) to use for the commit.
 
 ---
-
-If you want I can also:
-- Add package declarations (`com.coffeeshop`) and update the run script accordingly.
-- Add a small `run-gui.sh` for macOS/Linux.
-- Commit and push the current changes to GitHub (need your git name/email to create the commit).
-
-That's it  the README now focuses on what the app does and the exact, minimal commands to run the GUI from the VS Code PowerShell terminal.
