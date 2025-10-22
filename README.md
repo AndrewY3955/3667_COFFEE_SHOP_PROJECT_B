@@ -9,7 +9,7 @@ This README is concise: it explains what the app does and the exact commands to 
 - Let users choose a base beverage (Espresso, Dark Roast, Decaf, House Blend).
 - Choose exactly one size (Small, Medium, Large)  the app applies a size multiplier to the full price.
 - Pick any combination of condiments (Milk, Mocha, Soy, Whip, Caramel, Vanilla).
-- Show a live, human-readable price breakdown: base price, condiment extras, subtotal, size multiplier, and final total.
+- Show a live, easily readable price breakdown: base price, condiment extras, subtotal, size multiplier, and final total.
 - Add composed drinks to a persistent cart (view, edit, remove) and perform a simple checkout.
 
 All pricing is computed by the domain model (the base concrete classes and the condiment decorators) so the GUI does not duplicate price logic.
