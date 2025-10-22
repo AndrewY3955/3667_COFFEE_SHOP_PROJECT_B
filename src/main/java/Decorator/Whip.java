@@ -2,11 +2,11 @@ package main.java.Decorator;
 
 import main.java.Base.Coffee;
 
-public class Vanilla extends CondimentDecorator 
+public class Whip extends CondimentDecorator 
 {
     private Coffee coffee;
 
-    public Vanilla(Coffee coffee) 
+    public Whip(Coffee coffee) 
 	{
         this.coffee = coffee;
     }
@@ -14,13 +14,13 @@ public class Vanilla extends CondimentDecorator
     @Override
     public String getDescription() 
 	{
-        return coffee.getDescription() + ", Vanilla";
+        return coffee.getDescription() + ", Whip";
     }
 
     @Override
     public double cost(String size) 
 	{
-        double add = 0.25;
+        double add = 0.15;
         return coffee.cost(size) + (add * getSizeMultiplier(size));
     }
 
